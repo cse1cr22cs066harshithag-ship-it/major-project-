@@ -5,7 +5,8 @@ services:
     region: oregon
     plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn $WSGI_MODULE:application --bind 0.0.0.0:$PORT
+    # Use an explicit WSGI module to avoid empty env var issues in the deploy environment.
+    startCommand: gunicorn Cloud.wsgi:application --bind 0.0.0.0:$PORT
     envVars:
       - key: WSGI_MODULE
         value: Cloud.wsgi
