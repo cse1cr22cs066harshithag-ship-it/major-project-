@@ -1,4 +1,4 @@
-web: gunicorn ${WSGI_MODULE}:application --bind 0.0.0.0:${PORT:-10000}
+web: gunicorn Cloud.wsgi:application --bind 0.0.0.0:$PORT
 
-# Set the environment variable `WSGI_MODULE` in Render or your host to
-# your Django project's WSGI module, for example: `myproject.wsgi`.
+# Explicit WSGI module to avoid an empty `WSGI_MODULE` causing startup errors.
+# If you change your project package name, update this line to `<yourpkg>.wsgi:application`.
